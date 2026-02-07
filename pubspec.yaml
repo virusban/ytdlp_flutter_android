@@ -1,5 +1,5 @@
 name: ytdlp_flutter_android
-description: A Flutter app to download YouTube videos and audio using yt-dlp and ffmpeg (Python)
+description: Flutter app to download YouTube videos and audio via Python (Chaquopy)
 version: 1.0.0+1
 environment:
   sdk: ">=3.2.0 <4.0.0"
@@ -10,9 +10,4 @@ dependencies:
   file_picker: ^6.0.1
   path_provider: ^2.0.15
   permission_handler: ^11.0.3
-  flutter_python: ^0.0.8   # Python bridge
   percent_indicator: ^4.2.2
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
