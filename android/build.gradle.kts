@@ -1,9 +1,3 @@
-// Top-level build file
-
-plugins {
-    kotlin("jvm") version "1.9.10" apply false
-}
-
 buildscript {
     val kotlin_version by extra("1.9.10")
     repositories {

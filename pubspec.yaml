@@ -1,5 +1,5 @@
 name: ytdlp_flutter_android
-description: Flutter app to download YouTube videos and audio via Python (Chaquopy)
+description: Flutter app to download YouTube videos/audio via Chaquopy Python
 version: 1.0.0+1
 environment:
   sdk: ">=3.2.0 <4.0.0"
@@ -7,7 +7,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  file_picker: ^6.0.1
+  file_picker: ^6.2.1
   path_provider: ^2.0.15
-  permission_handler: ^11.0.3
-  percent_indicator: ^4.2.2
+  permission_handler: ^11.4.0
+  percent_indicator: ^4.2.5

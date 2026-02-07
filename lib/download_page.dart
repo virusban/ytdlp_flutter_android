@@ -31,7 +31,7 @@ class _DownloadPageState extends State<DownloadPage> {
           DropdownButton<String>(
             value: _selectedFormat,
             items: formats.map((f) => DropdownMenuItem(value: f, child: Text(f))).toList(),
-            onChanged: (val){setState((){_selectedFormat=val!;});}
+            onChanged: (val){setState(()=>_selectedFormat=val!);}
           ),
           const SizedBox(height: 16),
           ElevatedButton(onPressed: _pickFolder, child: const Text("Choose Save Folder")),
@@ -48,7 +48,7 @@ class _DownloadPageState extends State<DownloadPage> {
 
   void _pickFolder() async {
     String? dir = await FilePicker.platform.getDirectoryPath();
-    if (dir!=null) setState(()=>_savePath=dir);
+    if(dir != null) setState(()=>_savePath=dir);
   }
 
   void _download() async {
