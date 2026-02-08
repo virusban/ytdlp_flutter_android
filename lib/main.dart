@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
 void main() {
@@ -22,7 +21,10 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData(
             useMaterial3: true,
-            colorScheme: dark ?? ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.dark),
+            colorScheme: dark ?? ColorScheme.fromSeed(
+              seedColor: Colors.deepPurple,
+              brightness: Brightness.dark,
+            ),
           ),
           home: const HomePage(),
         );
@@ -33,28 +35,29 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final urlController = TextEditingController();
-  String format = "mp4";
-  String? folder;
-
   static const channel = MethodChannel("ytdlp_channel");
 
+  final urlController = TextEditingController();
+  String format = "mp4";
+  String? folderUri;
+
   Future<void> pickFolder() async {
-    folder = await FilePicker.platform.getDirectoryPath();
-    setState(() {});
+    final uri = await channel.invokeMethod<String>("pickFolder");
+    setState(() => folderUri = uri);
   }
 
   Future<void> download() async {
-    if (folder == null || urlController.text.isEmpty) return;
+    if (folderUri == null || urlController.text.isEmpty) return;
 
     await channel.invokeMethod("download", {
       "url": urlController.text,
-      "path": folder,
+      "folderUri": folderUri,
       "format": format,
     });
 
@@ -66,22 +69,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("YT-DLP Downloader"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("YT-DLP SAF Downloader")),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(12),
-                child: Text(
-                  "⚠️ Только для личного использования",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
+                child: Text("⚠️ Только для личного использования"),
               ),
             ),
             const SizedBox(height: 16),
@@ -108,12 +104,12 @@ class _HomePageState extends State<HomePage> {
             FilledButton.icon(
               onPressed: pickFolder,
               icon: const Icon(Icons.folder_open),
-              label: const Text("Выбрать папку"),
+              label: const Text("Выбрать папку (SAF)"),
             ),
-            if (folder != null)
+            if (folderUri != null)
               Padding(
                 padding: const EdgeInsets.only(top: 8),
-                child: Text(folder!, style: Theme.of(context).textTheme.bodySmall),
+                child: Text(folderUri!, style: Theme.of(context).textTheme.bodySmall),
               ),
             const Spacer(),
             FilledButton(
