@@ -1,0 +1,25 @@
+name: yt_dlp_flutter
+description: A Flutter project that downloads from YouTube via youtube_explode_dart and converts with FFmpegKit
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ">=2.18.0 <4.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  path_provider: ^2.0.11
+  youtube_explode_dart: ^1.10.0
+  ffmpeg_kit_flutter_min_gpl: ^4.5.1
+  permission_handler: ^10.4.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/placeholder_yt.txt

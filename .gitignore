@@ -1,0 +1,11 @@
+/.dart_tool/
+/idea/
+/.vscode/
+/build/
+/.packages
+/.flutter-plugins
+/.flutter-plugins-dependencies
+/.metadata
+pubspec.lock
+android/.gradle/
+**/generated_plugin_registrant.dart
