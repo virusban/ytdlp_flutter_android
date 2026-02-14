@@ -7,6 +7,13 @@ allprojects {
         maven {
             url = uri("https://jitpack.io")
         }
+        // Arthenica FFmpeg Kit repositories
+        maven {
+            url = uri("https://maven.ffmpegkit.org")
+        }
+        maven {
+            url = uri("https://maven.arthenica.com")
+        }
     }
 }
 
