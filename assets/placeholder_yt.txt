@@ -1,0 +1,2 @@
+This placeholder asset is intentionally empty.
+It exists so the Flutter asset bundle referenced in `pubspec.yaml` resolves.
