@@ -2,6 +2,11 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        // Some older FFmpeg Kit artifacts are hosted on JCenter/JitPack
+        jcenter()
+        maven {
+            url = uri("https://jitpack.io")
+        }
     }
 }
 
