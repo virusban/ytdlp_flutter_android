@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:ffmpeg_kit_flutter_min_gpl/ffmpeg_kit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -92,7 +93,9 @@ class _HomePageState extends State<HomePage> {
         await _appendLog('Download complete');
         if (format != streamInfo.container.name) {
           final converted = '${dir.path}/$title.$format';
-          await _appendLog('Conversion skipped: FFmpegKit not available in this build');
+          await _appendLog('Converting to $format');
+          await FFmpegKit.execute('-i "$outPath" -c copy "$converted"');
+          await _appendLog('Conversion finished: $converted');
         }
       } else {
         final audioInfo = streams.audio.withHighestBitrate();
@@ -109,7 +112,10 @@ class _HomePageState extends State<HomePage> {
         await _appendLog('Audio download complete');
 
         final outPath = '${dir.path}/$title.$format';
-        await _appendLog('Conversion skipped: FFmpegKit not available in this build');
+        await _appendLog('Converting to $format with FFmpegKit');
+        final cmd = '-i "$tempPath" -vn -ar 44100 -ac 2 "$outPath"';
+        await FFmpegKit.execute(cmd);
+        await _appendLog('Conversion finished: $outPath');
       }
     } catch (e, st) {
       await _appendLog('Error: $e');
